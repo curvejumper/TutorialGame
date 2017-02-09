@@ -74,7 +74,7 @@ public class MainThread extends Thread {
             frameCount++;
             if(frameCount == MAX_FPS){
                 //converting from nano to milli
-                averageFPS = 1000/(totalTime / frameCount/1000000);
+                averageFPS = 1000/(totalTime/frameCount/1000000);
                 frameCount = 0;
                 totalTime = 0;
                 System.out.println(averageFPS);
