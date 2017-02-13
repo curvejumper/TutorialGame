@@ -52,12 +52,12 @@ public class RectPlayer implements GameObject {
 
     @Override
     public void draw(Canvas canvas) {
-        //draw player to canvas
+        //draw rectangle to canvas
 //        Paint paint = new Paint();
 //        paint.setColor(color);
 //        canvas.drawRect(rectangle, paint);
 
-        //now an actual player
+        //now draw actual player
         animationManager.draw(canvas, rectangle);
     }
 
@@ -66,7 +66,7 @@ public class RectPlayer implements GameObject {
         animationManager.update();
     }
 
-    //want this rectanble to have a point which is center of rectangle
+    //want this rectangle to have a point which is center of rectangle
     public void update(Point point){
         float oldLeft = rectangle.left;
         float oldTop = rectangle.top;
