@@ -11,7 +11,7 @@ import android.view.SurfaceHolder;
 public class MainThread extends Thread {
     //meat of the game
 
-    //b/c most phones can do 30 but more would just be unnessecary
+    //b/c most phones can do 30 but more would just be unnecessary
     public static final int MAX_FPS = 30;
     private double averageFPS;
     private SurfaceHolder surfaceHolder;

@@ -1,5 +1,6 @@
 package com.michael.tutorialgame;
 
+import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -29,12 +30,16 @@ public class GameplayScene implements Scene {
     private boolean gameOver = false;
     private long gameOverTime;
 
+    private GameMusic gameMusic;
+
     public GameplayScene(){
         player = new RectPlayer(new Rect(100, 100, 200, 200), Color.rgb(255, 0, 0));
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
 
         obstacleManager = new ObstacleManager(200, 350, 75, Color.BLACK);
+
+        gameMusic = new GameMusic(Constants.CURRENT_CONTEXT);
     }
 
     public void reset() {
@@ -42,6 +47,7 @@ public class GameplayScene implements Scene {
         player.update(playerPoint);
         obstacleManager = new ObstacleManager(200, 350, 75, Color.BLACK);
         movingPlayer = false;
+        gameMusic.play();
     }
 
     @Override
@@ -50,6 +56,7 @@ public class GameplayScene implements Scene {
             player.update(playerPoint);
             obstacleManager.update();
             if(obstacleManager.playerCollide(player)){
+                gameMusic.pause();
                 gameOver = true;
                 gameOverTime = System.currentTimeMillis();
             }
@@ -74,6 +81,7 @@ public class GameplayScene implements Scene {
     @Override
     public void terminate() {
         SceneManager.ACTIVE_SCENE = 0;
+        gameMusic.stop();
     }
 
     @Override
