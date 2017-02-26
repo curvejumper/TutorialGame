@@ -21,12 +21,13 @@ public class RectPlayer implements GameObject {
     private Animation walkRight;
     private Animation walkLeft;
 
+
     private AnimationManager animationManager;
 
     public Rect getRectangle() {return rectangle;}
 
     public RectPlayer(Rect rectangle, int color){
-        this.rectangle = rectangle;
+//        this.rectangle = rectangle;
         this.color = color;
 
         BitmapFactory bf = new BitmapFactory();
@@ -34,6 +35,7 @@ public class RectPlayer implements GameObject {
         Bitmap walk1 = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.alienblue_walk1);
         Bitmap walk2 = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.alienblue_walk2);
 
+        this.rectangle = new Rect(idleImg.getWidth(), idleImg.getHeight(), 3*idleImg.getWidth() / 2, 3*idleImg.getHeight() / 2);
         idle = new Animation(new Bitmap[]{idleImg}, 2);
         walkRight = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
 
@@ -76,9 +78,9 @@ public class RectPlayer implements GameObject {
 
         int state = 0;
 
-        if(rectangle.left - oldLeft > 5){
+        if(rectangle.left - oldLeft > 3){
             state = 1;
-        } else if ( rectangle.left - oldLeft < -5){
+        } else if ( rectangle.left - oldLeft < -3){
             state = 2;
         }
 
