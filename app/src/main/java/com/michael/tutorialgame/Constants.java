@@ -12,5 +12,7 @@ public class Constants {
 
     public static Context CURRENT_CONTEXT;
 
+    //for storage of high score
+    public static String FILENAME = "score_file";
 
 }
