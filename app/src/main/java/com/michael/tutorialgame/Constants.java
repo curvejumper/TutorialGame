@@ -1,6 +1,7 @@
 package com.michael.tutorialgame;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 /**
  * Created by micha on 2/8/2017.
@@ -16,4 +17,7 @@ public class Constants {
     //for storage of high score
     public static String FILENAME = "score_file";
 
+    //player info
+    public static int PLAYER_WIDTH;
+    public static int PLAYER_HEIGHT;
 }

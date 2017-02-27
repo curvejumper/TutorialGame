@@ -31,8 +31,8 @@ public class GameplayScene implements Scene {
     private ObstacleManager obstacleManager;
 
     private boolean movingPlayer = false;
-    int xDelta = 0;
-    int Start_Location;
+    private int xDelta = 0;
+    private int Start_Location;
 
     //if we collided and on game over screen
     private boolean gameOver = false;
@@ -48,7 +48,7 @@ public class GameplayScene implements Scene {
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
 
-        obstacleManager = new ObstacleManager(200, 350, 75, Color.BLUE);
+        obstacleManager = new ObstacleManager(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT * 2, Constants.PLAYER_HEIGHT / 3, Color.BLUE);
 
         orientationData = new OrientationData();
         orientationData.register();
@@ -62,7 +62,7 @@ public class GameplayScene implements Scene {
     public void reset() {
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
-        obstacleManager = new ObstacleManager(200, 500, 75, Color.BLUE);
+        obstacleManager = new ObstacleManager(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT * 2, Constants.PLAYER_HEIGHT / 3, Color.BLUE);
         movingPlayer = false;
         gameMusic.play();
     }
