@@ -1,6 +1,5 @@
-package com.michael.tutorialgame;
+package com.michael.alienBolt;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
@@ -9,9 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.MotionEvent;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 
 /**
  * Created by micha on 2/10/2017.
@@ -48,7 +44,7 @@ public class GameplayScene implements Scene {
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
 
-        obstacleManager = new ObstacleManager(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT * 2, Constants.PLAYER_HEIGHT / 3, Color.BLUE);
+        obstacleManager = new ObstacleManager(200, 400, 75, Color.BLUE);
 
         orientationData = new OrientationData();
         orientationData.register();
@@ -62,7 +58,7 @@ public class GameplayScene implements Scene {
     public void reset() {
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
-        obstacleManager = new ObstacleManager(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT * 2, Constants.PLAYER_HEIGHT / 3, Color.BLUE);
+        obstacleManager = new ObstacleManager(200, 350, 75, Color.BLUE);
         movingPlayer = false;
         gameMusic.play();
     }

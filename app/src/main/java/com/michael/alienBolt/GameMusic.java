@@ -1,11 +1,10 @@
-package com.michael.tutorialgame;
+package com.michael.alienBolt;
 
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
 
 import java.io.IOException;
-import java.net.URI;
 
 /**
  * Created by micha on 2/12/2017.

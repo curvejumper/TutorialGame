@@ -1,4 +1,4 @@
-package com.michael.tutorialgame;
+package com.michael.alienBolt;
 
 import android.graphics.Canvas;
 import android.view.MotionEvent;

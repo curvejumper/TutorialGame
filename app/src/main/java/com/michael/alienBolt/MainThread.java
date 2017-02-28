@@ -1,7 +1,6 @@
-package com.michael.tutorialgame;
+package com.michael.alienBolt;
 
 import android.graphics.Canvas;
-import android.provider.Settings;
 import android.view.SurfaceHolder;
 
 /**

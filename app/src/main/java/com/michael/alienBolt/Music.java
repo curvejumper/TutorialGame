@@ -1,4 +1,4 @@
-package com.michael.tutorialgame;
+package com.michael.alienBolt;
 
 /**
  * Created by micha on 2/12/2017.

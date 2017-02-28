@@ -1,7 +1,6 @@
-package com.michael.tutorialgame;
+package com.michael.alienBolt;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 
 /**
  * Created by micha on 2/8/2017.

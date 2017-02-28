@@ -1,7 +1,6 @@
-package com.michael.tutorialgame;
+package com.michael.alienBolt;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Window;
