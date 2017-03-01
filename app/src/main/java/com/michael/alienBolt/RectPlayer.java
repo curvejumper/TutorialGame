@@ -30,9 +30,9 @@ public class RectPlayer implements GameObject {
         this.color = color;
 
         BitmapFactory bf = new BitmapFactory();
-        Bitmap idleImg = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.alienblue);
-        Bitmap walk1 = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.alienblue_walk1);
-        Bitmap walk2 = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.alienblue_walk2);
+        Bitmap idleImg = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.alienyellow);
+        Bitmap walk1 = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.alienyellow_walk1);
+        Bitmap walk2 = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.alienyellow_walk2);
 
         this.rectangle = new Rect(idleImg.getWidth(), idleImg.getHeight(), 3*idleImg.getWidth() / 2, 3*idleImg.getHeight() / 2);
         idle = new Animation(new Bitmap[]{idleImg}, 2);

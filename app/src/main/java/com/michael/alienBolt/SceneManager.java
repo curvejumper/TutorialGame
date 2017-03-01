@@ -29,5 +29,4 @@ public class SceneManager {
     public void draw(Canvas canvas){
         scenes.get(ACTIVE_SCENE).draw(canvas);
     }
-
 }

@@ -1,5 +1,10 @@
 package com.michael.alienBolt;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
@@ -7,7 +12,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.LinearLayout;
+
+import static com.michael.alienBolt.R.id.adView;
 
 /**
  * Created by micha on 2/10/2017.
@@ -39,7 +50,16 @@ public class GameplayScene implements Scene {
     private OrientationData orientationData;
     private long frameTime;
 
+    //for ads
+    private Handler mHandler;
+    private boolean runOnce = false;
+    private boolean showAd = false;
+    private boolean hideAd = false;
+
     public GameplayScene(){
+        //to call main UI thread
+        mHandler = new Handler(Constants.CURRENT_CONTEXT.getMainLooper());
+
         player = new RectPlayer(new Rect(100, 100, 200, 200), Color.rgb(255, 0, 0));
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
@@ -56,6 +76,12 @@ public class GameplayScene implements Scene {
     }
 
     public void reset() {
+        //for ad
+        runOnce = false;
+        showAd = false;
+        hideAd = true;
+        mHandler.post(myRunnable);
+
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
         obstacleManager = new ObstacleManager(200, 350, 75, Color.BLUE);
@@ -71,27 +97,12 @@ public class GameplayScene implements Scene {
             }
             int elapsedTime = (int) (System.currentTimeMillis() - frameTime);
             frameTime = System.currentTimeMillis();
-//            if(orientationData.getOrientation() != null && orientationData.getStartOrientation() != null){
-//                float pitch = orientationData.getOrientation()[1] - orientationData.getStartOrientation()[1];
-//                float roll = orientationData.getOrientation()[2] - orientationData.getStartOrientation()[2];
-//
-//                float xSpeed = 2 * roll * Constants.SCREEN_WIDTH/1000f;
-//                float ySpeed = pitch * Constants.SCREEN_HEIGHT/1000f;
-//
-//                playerPoint.x += Math.abs(xSpeed*elapsedTime) > 5 ? xSpeed*elapsedTime : 0;
-//                playerPoint.y -= Math.abs(ySpeed*elapsedTime) > 5 ? ySpeed*elapsedTime : 0;
-//            }
 
             if (playerPoint.x < 0){
                 playerPoint.x = 0;
             } else if(playerPoint.x > Constants.SCREEN_WIDTH){
                 playerPoint.x = Constants.SCREEN_WIDTH;
             }
-//            if (playerPoint.y < 0){
-//                playerPoint.y = 0;
-//            } else if(playerPoint.y > Constants.SCREEN_HEIGHT){
-//                playerPoint.y = Constants.SCREEN_HEIGHT;
-//            }
 
             player.update(playerPoint);
             obstacleManager.update();
@@ -101,12 +112,21 @@ public class GameplayScene implements Scene {
                 gameOver = true;
                 gameOverTime = System.currentTimeMillis();
             }
+        } else {
+            if(!runOnce){
+                showAd = true;
+                mHandler.post(myRunnable);
+                runOnce = true;
+            }
         }
     }
 
     @Override
     public void draw(Canvas canvas) {
         canvas.drawColor(Color.rgb(0,0,125));
+        //red background
+//        canvas.drawColor(Color.rgb(102,3,23));
+
 
         player.draw(canvas);
         obstacleManager.draw(canvas);
@@ -115,7 +135,7 @@ public class GameplayScene implements Scene {
             int score = getScore();
             Paint paint = new Paint();
             paint.setTextSize(100);
-            paint.setColor(Color.MAGENTA);
+            paint.setColor(Color.rgb(110, 255, 12));
             drawCenterText(canvas, paint, "Game Over", "High Score: " + score);
         }
     }
@@ -188,4 +208,22 @@ public class GameplayScene implements Scene {
         }
         return storedScore;
     }
+
+    Runnable myRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if(showAd) {
+                Constants.sAdView.setVisibility(View.VISIBLE);
+                Constants.sAdView.loadAd(new AdRequest.Builder()
+                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+                Constants.sAdView.setActivated(true);
+                showAd = false;
+            }
+            if(hideAd){
+                Constants.sAdView.setVisibility(View.GONE);
+                hideAd = false;
+            }
+        }
+    };
+
 }
